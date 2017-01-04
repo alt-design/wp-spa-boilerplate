@@ -30,7 +30,7 @@ ob_start();
 
 
 // Open the file
-$html = fopen(__DIR__ . '/webpack-temp.html', 'w+');
+$html = fopen(__DIR__ . '/webpackTemp.html', 'w+');
 
 fwrite($html, str_replace(get_template_directory_uri(), '', ob_get_contents()));
 

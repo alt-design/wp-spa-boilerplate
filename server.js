@@ -47,7 +47,7 @@ app.use(require('morgan')('short'));
 axios.get(options.siteUrl);
 
 app.get("*", function (req, res) {
-    res.sendFile(__dirname + '/webpack-temp.html');
+    res.sendFile(__dirname + '/webpackTemp.html');
 });
 
 const server = http.createServer(app);
