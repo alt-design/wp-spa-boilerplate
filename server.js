@@ -12,7 +12,7 @@ const webpackDevMiddleware = require("webpack-dev-middleware");
  * --------------------------------- */
 const options = {
     siteUrl   : 'http://theme.dev/',
-    portNumber: 1234
+    portNumber: 3000
 };
 
 /* ---------------------------------

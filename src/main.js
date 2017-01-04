@@ -5,7 +5,7 @@
 import Vue from 'vue';
 import VueLazy from 'vue-lazyload';
 import store from './vuex/store';
-import App from './App.vue';
+import App from './App';
 import router from './router/Router';
 import Ready from './imports/Ready';
 import './assets/scss/main.scss';
@@ -16,9 +16,9 @@ Vue.use(VueLazy, {
 });
 
 // Register Global Components this way. They bind to Vue, not the main Vue Instance
-Vue.component('app-menu', require('./components/Menus/AppMenu.vue'));
-Vue.component('app-menu-item', require('./components/Menus/AppMenuItem.vue'));
-Vue.component('container', require('./components/Container/Container.vue'));
+Vue.component('app-menu', require('./components/Menus/AppMenu'));
+Vue.component('app-menu-item', require('./components/Menus/AppMenuItem'));
+Vue.component('container', require('./components/Container/Container'));
 
 // Main vue instance
 window.Vue = new Vue({

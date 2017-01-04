@@ -19,6 +19,9 @@ if (process.argv.indexOf('useDevMiddleware') > -1) settings.entry.unshift("webpa
 module.exports = {
     entry  : settings.entry,
     output : settings.output,
+    resolve: {
+        extensions: [".webpack.js", ".web.js", ".js", '.vue']
+    },
     module : {
         rules: [
             {

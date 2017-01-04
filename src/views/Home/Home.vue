@@ -11,7 +11,7 @@
 <script>
     export default{
         components: {
-            pageBuilder: require('../../components/PageBuilder/PageBuilder.vue')
+            pageBuilder: require('../../components/PageBuilder/PageBuilder')
         }
     }
 </script>

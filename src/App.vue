@@ -13,11 +13,7 @@
 </template>
 
 <script>
-    export default{
-        components: {
-            container: require('./components/Container/Container.vue')
-        }
-    }
+    export default{}
 </script>
 
 <style lang="scss" scoped>

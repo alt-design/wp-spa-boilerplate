@@ -1,5 +1,5 @@
-import Home from '../views/Home/Home.vue';
-import Page from '../views/Page/Page.vue';
+import Home from '../views/Home/Home';
+import Page from '../views/Page/Page';
 
 const routes = [
     {
