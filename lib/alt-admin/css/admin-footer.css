@@ -1,0 +1,23 @@
+/**********************************************************************
+
+ADMIN FOOTER
+
+**********************************************************************/
+
+#wpfooter p {
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+#wpfooter #footer-upgrade .alt-footer-logo {
+    background-image: url('../images/altdesign.svg') !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    height: 30px;
+    outline: none;
+    overflow: hidden;
+    text-indent: 9999px;
+    width: 51px;
+}

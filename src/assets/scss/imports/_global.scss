@@ -1,0 +1,31 @@
+/* ---------------------------------
+ * App Styles
+ * --------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+    color: $color__black;
+}
+
+// Some nice <pre> styling for your development needs
+pre {
+    background: $color__alt;
+    padding: 20px;
+    margin: 20px 0;
+    color: white;
+    border: solid 2px darken($color__alt, 10%);
+    white-space: pre-wrap;
+
+    &:before {
+        content: "If you can see this, don't panic. We use it to help us get stuff done! Thanks, Alt.";
+        display: block;
+        width: 100%;
+        float: left;
+        clear: both;
+        margin-bottom: 40px;
+    }
+}
