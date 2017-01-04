@@ -5,8 +5,6 @@
 </template>
 
 <script>
-    import axios from 'axios'
-
     export default{
         props: {
             location: String
@@ -17,7 +15,7 @@
             }
         },
         created(){
-            axios.get('/wp-json/wp-api-menus/v2/menu-locations/' + this.location).then(res => {
+            this.$http.get('/wp-json/wp-api-menus/v2/menu-locations/' + this.location).then(res => {
                 if (res.data.length > 0) {
                     this.items = res.data;
                 } else {

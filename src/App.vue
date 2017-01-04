@@ -1,8 +1,6 @@
 <template>
     <main class="App">
 
-        <app-menu location="main"></app-menu>
-
         <transition name="fade" mode="out-in" appear>
 
             <router-view :key="$route.fullPath"></router-view>
@@ -17,5 +15,13 @@
 </script>
 
 <style lang="scss" scoped>
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s
+    }
+
+    .fade-enter, .fade-leave-active {
+        opacity: 0
+    }
 
 </style>

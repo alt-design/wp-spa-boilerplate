@@ -1,24 +1,24 @@
-import store from "../vuex/store";
+import store from '../vuex/store';
 
 export default class Ready {
 
     constructor() {
         Ready.setThemeDir();
         Ready.setSiteURL();
-        Ready.setTagLine();
         Ready.setName();
     }
 
     static setSiteURL() {
-        store.commit('setSiteURL', document.querySelector('#url').innerHTML)
+        store.commit('setSiteURL', Ready.getSiteURL())
+    }
+
+    static getSiteURL() {
+        let url = document.querySelector('#url').innerHTML;
+        return url[url.length - 1] === '/' ? url.slice(0, -1) : url
     }
 
     static setThemeDir() {
         store.commit('setThemeDir', document.querySelector('#theme').innerHTML)
-    }
-
-    static setTagLine() {
-        store.commit('setTagLine', document.querySelector('#tagLine').innerHTML)
     }
 
     static setName() {
