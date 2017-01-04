@@ -1,7 +1,7 @@
 <template>
     <li :class="[location + '__ul__li', item.classes ? item.classes : '']">
         <router-link :class="location + '__ul__li__a'"
-                     :to="'/' + getSlug(item.url)"
+                     :to="getSlug(item.url)"
                      :target="item.target ? item.target : ''"
                      :title="item.title ? item.title : ''"
                      v-html="item.title"
