@@ -9,7 +9,7 @@
         </router-link>
 
         <!--submenu-->
-        <ul :class="location + '__ul'" v-if="item.children">
+        <ul :class="location + '__ul'" v-if="item.children.length > 0">
             <app-menu-item v-for="(item,key) of item.children" :item="item" :location="location" :depth="depth + 1"></app-menu-item>
         </ul>
         <!--/end submenu-->
@@ -29,7 +29,6 @@
         methods: {
             getSlug(string){
                 return string.replace(this.$store.state.url, '', string);
-
             }
         }
     }
