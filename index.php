@@ -32,7 +32,7 @@ ob_start();
 // Open the file
 $html = fopen(__DIR__ . '/webpackTemp.html', 'w+');
 
-fwrite($html, str_replace(get_template_directory_uri(), '', ob_get_contents()));
+fwrite($html, str_replace('=\'' . get_stylesheet_directory_uri(), '=\'', str_replace('="' . get_stylesheet_directory_uri(), '"', ob_get_contents())));
 
 // Close the file
 fclose($html);
