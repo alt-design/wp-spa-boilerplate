@@ -271,7 +271,7 @@ class AltThemeEndpoints
      *
      * @param $data
      * --------------------------------- */
-    public function queryAll($data)
+    public static function queryAll($data)
     {
 
         $AltThemeEndpoints = new AltThemeEndpoints();

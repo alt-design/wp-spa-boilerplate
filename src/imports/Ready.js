@@ -6,22 +6,26 @@ export default class Ready {
         Ready.setThemeDir();
         Ready.setSiteURL();
         Ready.setName();
+        Ready.setAdminURL();
     }
 
     static setSiteURL() {
         store.commit('setSiteURL', Ready.getSiteURL())
     }
 
+    static setAdminURL() {
+        store.commit('setAdminURL', document.getElementById('a-url').innerHTML)
+    }
+
     static getSiteURL() {
-        let url = document.querySelector('#url').innerHTML;
-        return url[url.length - 1] === '/' ? url.slice(0, -1) : url
+        return document.getElementById('url').innerHTML;
     }
 
     static setThemeDir() {
-        store.commit('setThemeDir', document.querySelector('#theme').innerHTML)
+        store.commit('setThemeDir', document.getElementById('theme').innerHTML)
     }
 
     static setName() {
-        store.commit('setName', document.querySelector('#name').innerHTML)
+        store.commit('setName', document.getElementById('name').innerHTML)
     }
 }

@@ -1,6 +1,7 @@
 export default {
-    theme: '',
-    url  : '',
-    name : '',
-    page : {}
+    theme   : '',
+    url     : '',
+    adminUrl: '',
+    name    : '',
+    page    : {}
 }

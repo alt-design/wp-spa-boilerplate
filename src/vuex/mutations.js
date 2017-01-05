@@ -1,10 +1,17 @@
+import Functions from '../imports/Functions';
+
 export default {
+
     setThemeDir(state, string){
         state.theme = string;
     },
 
     setSiteURL(state, string){
         state.url = string;
+    },
+
+    setAdminURL(state, string){
+        state.adminUrl = string;
     },
 
     setName(state, name){
@@ -22,6 +29,8 @@ export default {
 
             state.page     = res.data;
             document.title = res.data.post_title + " | " + state.name;
+
+            Functions.updateAdminBar();
 
         }, res => {
 
