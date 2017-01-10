@@ -133,7 +133,7 @@ class alt_admin_branding
      */
     function alt_custom_admin_footer()
     {
-        echo '<strong>' . get_bloginfo('name') . ', </strong>a site by <a style="color:#f60f60" href="http://www.alt-design.net/" title="Alt Design" target="_blank">Alt</a>';
+        echo '<strong>' . get_bloginfo('name') . ', </strong>a site by <a style="color:#f60" href="http://www.alt-design.net/" title="Alt Design" target="_blank">Alt</a>';
     }
 
     /**
