@@ -10,8 +10,8 @@
     </main>
 </template>
 
-<script>
-    export default{}
+<script type="text/babel">
+    export default{};
 </script>
 
 <style lang="scss" scoped>

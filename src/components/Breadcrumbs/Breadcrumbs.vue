@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script>
+<script type="text/babel">
     export default {
         methods: {
             relativeLink(link){

@@ -16,7 +16,7 @@
     </li>
 </template>
 
-<script>
+<script type="text/babel">
     export default{
         props  : {
             item    : Object,
