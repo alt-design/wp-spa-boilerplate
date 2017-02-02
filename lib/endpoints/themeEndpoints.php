@@ -1,18 +1,22 @@
 <?php
 
-/* ---------------------------------
+/*
  * This file holds all of the themes required endpoints.
- * ---------------------------------
+ *
  * If you wish to add more endpoints,
  * please do so in addonEndpoints.php
- * --------------------------------- */
+ * */
 
 class AltThemeEndpoints
 {
 
-    /* ---------------------------------
+    /**
      * Get an array of featured image size urls
-     * --------------------------------- */
+     *
+     * @param $id
+     *
+     * @return array|null
+     */
     public function getFeaturedImg($id)
     {
 
@@ -30,10 +34,14 @@ class AltThemeEndpoints
 
     }
 
-
-    /* ---------------------------------
+    /**
      * Gets all taxonomy and term data
-     * --------------------------------- */
+     *
+     * @param $id
+     * @param $taxs
+     *
+     * @return array
+     */
     public static function getPostTaxTerm($id, $taxs)
     {
 
@@ -41,7 +49,7 @@ class AltThemeEndpoints
         foreach ($taxs as $tax) {
 
             $returnData[] = [
-                'name'  => $tax['name'],
+                'name' => $tax['name'],
                 'terms' => wp_get_post_terms($id, $tax['name'], ['fields' => 'names'])
             ];
 
@@ -51,42 +59,45 @@ class AltThemeEndpoints
 
     }
 
-    /* ---------------------------------
+    /**
      * Return all posts from any post type
-     * --------------------------------- */
+     *
+     * @param $data
+     *
+     */
     public function getArchiveData($data)
     {
 
-        $endpoints         = new AltThemeEndpoints();
-        $posts             = [];
-        $taxonomies        = [];
-        $postIds           = get_posts([
+        $endpoints = new AltThemeEndpoints();
+        $posts = [];
+        $taxonomies = [];
+        $postIds = get_posts([
             'posts_per_page' => -1,
-            'fields'         => 'ids',
-            'post_type'      => $data['post_type']
+            'fields' => 'ids',
+            'post_type' => $data['post_type']
         ]);
         $ignoredTaxonomies = [
             'post_tag',
             'post_format'
         ];
-        $ignoredTerms      = [
+        $ignoredTerms = [
 //            'Uncategorized',
 //            'Uncategorised'
         ];
 
         foreach (get_object_taxonomies($data['post_type']) as $tax) {
 
-            if ( ! in_array($tax, $ignoredTaxonomies)) {
+            if (!in_array($tax, $ignoredTaxonomies)) {
 
                 $terms = [];
 
                 // exclude ignored terms
                 foreach (get_terms(['fields' => 'names', 'taxonomy' => $tax]) as $term) {
-                    ! in_array($term, $ignoredTerms) ? $terms[] = $term : null;
+                    !in_array($term, $ignoredTerms) ? $terms[] = $term : null;
                 }
 
                 $taxonomies[] = [
-                    'name'  => $tax,
+                    'name' => $tax,
                     'terms' => $terms
                 ];
 
@@ -96,10 +107,10 @@ class AltThemeEndpoints
 
         foreach ($postIds as $postId) {
             $posts[] = [
-                'title'      => get_the_title($postId),
-                'date'       => get_the_date('d F', $postId),
-                'link'       => get_the_permalink($postId),
-                'img'        => $endpoints->getFeaturedImg($postId),
+                'title' => get_the_title($postId),
+                'date' => get_the_date('d F', $postId),
+                'link' => get_the_permalink($postId),
+                'img' => $endpoints->getFeaturedImg($postId),
                 'taxonomies' => AltThemeEndpoints::getPostTaxTerm($postId, $taxonomies)
             ];
         }
@@ -110,10 +121,12 @@ class AltThemeEndpoints
 
     }
 
-
-    /* ---------------------------------
+    /**
      * Return Featured Image Array
-     * --------------------------------- */
+     *
+     * @param $data
+     *
+     */
     public function returnFeaturedImg($data)
     {
 
@@ -122,10 +135,13 @@ class AltThemeEndpoints
 
     }
 
-
-    /* ---------------------------------
+    /**
      * Collect and return the data for a post from is ID
-     * --------------------------------- */
+     *
+     * @param $id
+     *
+     * @return array|null|string|WP_Post
+     */
     public function getPostData($id)
     {
 
@@ -179,9 +195,13 @@ class AltThemeEndpoints
     }
 
 
-    /* ---------------------------------
+    /**
      * Get breadcrumbs from ID
-     * --------------------------------- */
+     *
+     * @param $id
+     *
+     * @return array
+     */
     public function getBreadcrumbs($id)
     {
 
@@ -211,7 +231,7 @@ class AltThemeEndpoints
     }
 
 
-    /* ---------------------------------
+    /**
      * Checks the slug passed against post types to see if it matches,
      * This means that when we search for the slug, we can check only
      * against the correct post type, allowing us to have posts in
@@ -220,15 +240,14 @@ class AltThemeEndpoints
      * @param $slug
      *
      * @return array
-     * --------------------------------- */
+     */
     public function checkType($slug)
     {
+        $matchingPostType = '';
 
         if ($slug[0] !== '/') {
             $slug = '/' . $slug;
         }
-
-        $matchingPostType = '';
 
         // Retrieves a list of all post types
         $allPostTypes = get_post_types('', 'objects', '');
@@ -236,133 +255,123 @@ class AltThemeEndpoints
         // Explode the different parts of the slug and remove blank array parts
         $slugParts = array_diff(explode('/', $slug), ['']);
 
-        // Check is second part to slug or if slug is just a page
-        if (isset($slugParts[2]) && ! empty($slugParts[2])) {
+        // Check is second part to slug or if slug is just 1 deep
+        if (isset($slugParts[2]) && !empty($slugParts[2])) {
 
             // For each post type
             foreach ($allPostTypes as $postType) {
-
-
                 $matchTo = $postType->rewrite['slug'] ? $postType->rewrite['slug'] : $postType->name;
+
                 // if the first part of the slug matches a post type rewrite url
                 if ($slugParts[1] === $matchTo) {
-
                     $matchingPostType = $postType->name;
-
                 }
-
             }
 
-            $returnSlug = str_replace('/', '', implode('', explode($matchingPostType, $slug, 2)));
+            // if no matching post type, assume the slug multipart slug is because it's a child page, return the full slug
+            if (!$matchingPostType) {
+                $returnSlug = $slug;
+            } else { // else return just the last part of the slug by stripping the post types rewrite url
+                $returnSlug = str_replace('/', '', implode('', explode($matchingPostType, $slug, 2)));
+            }
 
+            // else if the slug has only one part, like a normal page
         } else {
-            $returnSlug = str_replace('/', '', $slug);
+            $returnSlug = $slug;
         }
 
         return [
             'post_type' => $matchingPostType ? $matchingPostType : 'page',
-            'slug'      => $returnSlug
+            'slug' => $returnSlug
         ];
     }
 
-    /* --------------------------------- 
+    /**
      * Returns an Object with everything you need in
      * Just pass it an ID or slug!
      *
      * @param $data
-     * --------------------------------- */
+     *
+     */
     public static function queryAll($data)
     {
+
+        // If it's a preview, make sure we use the next request (from the previews ID) by killing this one.
+        if (!empty($data['slug']) && isset($_GET['preview'])) {
+            echo 'This is a preview endpoint!';
+            die();
+        }
 
         $AltThemeEndpoints = new AltThemeEndpoints();
 
         // Page Search Criteria
         $psc = $AltThemeEndpoints->checkType($data['slug']);
 
-
         // If the slug is not empty and isn't "/" (Home page)
-        if ( ! empty($data['slug'] && $data['slug'] !== '/')) {
-
+        if (!empty($data['slug'] && $data['slug'] !== '/')) {
             $id = get_page_by_path($psc['slug'], OBJECT, $psc['post_type'])->ID;
-
         } // If we have an ID instead of a slug
-        elseif ( ! empty($data['id'])) {
-
+        elseif (!empty($data['id'])) {
             $id = $data['id'];
-
         } // Else, it will be the Home page
         else {
-
             $id = get_option('page_on_front');
-
         }
 
         // Get and return the content from our narrowed down ID
         // Ensures ID is an integer
         echo json_encode($AltThemeEndpoints->getPostData(intval($id)));
-
         die();
-
     }
 
 }
 
 
-/* ---------------------------------
- *
- *
- * Endpoints are registered here
- *
- *
- * --------------------------------- */
-
-
-/* ---------------------------------
- * API endpoint for getting post data by ID or slug
- * --------------------------------- */
+/*
+ * Endpoints are registered on rest_api_init
+ * */
 add_action('rest_api_init', function () {
+
+    /*
+     * Endpoint for getting post data by ID or slug
+     * */
     register_rest_route('alt/v1', '/all', [
-        'methods'  => 'GET',
+        'methods' => 'GET',
         'callback' => ['AltThemeEndpoints', 'queryAll'],
-        'args'     => [
+        'args' => [
             'slug' => [
                 'default' => false // Pass a slug
             ],
-            'id'   => [
+            'id' => [
                 'default' => false // Or an ID
             ]
         ],
     ]);
-});
 
-
-/* ---------------------------------
- * API endpoint for getting Featured Images
- * --------------------------------- */
-add_action('rest_api_init', function () {
+    /*
+     * Endpoint for getting Featured Images
+     * */
     register_rest_route('alt/v1', '/featured-image', [
-        'methods'  => 'GET',
+        'methods' => 'GET',
         'callback' => ['AltThemeEndpoints', 'returnFeaturedImg'],
-        'args'     => [
+        'args' => [
             'id' => [
                 'default' => false // Or an ID
             ]
         ]
     ]);
-});
 
-
-/* ---------------------------------
- * API endpoint for getting All posts of a certain post type
- * --------------------------------- */
-add_action('rest_api_init', function () {
+    /*
+     * Endpoint for getting All posts of a certain post type
+     * */
     register_rest_route('alt/v1', '/archive', [
-        'methods'  => 'GET',
+        'methods' => 'GET',
         'callback' => ['AltThemeEndpoints', 'getArchiveData'],
-        'args'     => [
+        'args' => [
             'post_type' => [
                 'default' => false // Or an ID
             ]
         ]
     ]);
+
 });
