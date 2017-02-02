@@ -13,11 +13,11 @@ import axios from 'axios';
 
 // Vue Plugins
 Vue.use(VueLazy, {
-    listenEvents: ['scroll']
+  listenEvents: ['scroll']
 });
 
 Vue.prototype.$http = axios.create({
-    baseURL: Ready.getSiteURL(),
+  baseURL: Ready.getSiteURL(),
 });
 
 // Register Global Components this way. They bind to Vue, not the main Vue Instance
@@ -27,12 +27,12 @@ Vue.component('container', require('./components/Container/Container'));
 
 // Main vue instance
 window.Vue = new Vue({
-    el    : '#app',
-    store,
-    router,
-    mounted(){
-        new Ready();
-    },
-    render: h => h(App)
+  el: '#app',
+  store,
+  router,
+  mounted(){
+    new Ready();
+  },
+  render: h => h(App)
 });
 
