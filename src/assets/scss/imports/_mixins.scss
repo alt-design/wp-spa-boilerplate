@@ -1,52 +1,52 @@
-/* ---------------------------------
- * Media Query Mixins
- * --------------------------------- */
+/*
+Media Query Mixins
+*/
 @mixin min($min-width) {
-    @media screen and (min-width: $min-width) {
+    @media screen and (min-width : $min-width) {
         @content;
     }
 }
 
 @mixin max($max-width) {
-    @media screen and (max-width: $max-width) {
+    @media screen and (max-width : $max-width) {
         @content;
     }
 }
 
-/* ---------------------------------
- * Translate Mixins
- * --------------------------------- */
+/*
+Translate Mixins
+*/
 @mixin move($moveX, $moveY) {
-    transform: translate3d($moveX, $moveY, 0);
+    transform : translate3d($moveX, $moveY, 0);
 }
 
 @mixin moveX($moveX) {
-    transform: translate3d($moveX, 0, 0);
+    transform : translate3d($moveX, 0, 0);
 }
 
 @mixin moveY($moveY) {
-    transform: translate3d(0, $moveY, 0);
+    transform : translate3d(0, $moveY, 0);
 }
 
-/* ---------------------------------
- * Transition Mixins
- * --------------------------------- */
+/*
+Transition Mixins
+*/
 %tran--extra-short {
-    transition: .25s;
+    transition : .25s;
 }
 
 %tran--short {
-    transition: .5s;
+    transition : .5s;
 }
 
 %tran--mid {
-    transition: .75s;
+    transition : .75s;
 }
 
 %tran--long {
-    transition: 1s;
+    transition : 1s;
 }
 
 %tran--extra-long {
-    transition: 1.25s;
+    transition : 1.25s;
 }

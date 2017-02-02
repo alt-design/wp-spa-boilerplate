@@ -12,9 +12,7 @@ import './assets/scss/main.scss';
 import axios from 'axios';
 
 // Vue Plugins
-Vue.use(VueLazy, {
-  listenEvents: ['scroll']
-});
+Vue.use(VueLazy);
 
 Vue.prototype.$http = axios.create({
   baseURL: Ready.getSiteURL(),

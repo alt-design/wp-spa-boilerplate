@@ -1,19 +1,11 @@
-// -----------------
-// Important imports
-// -----------------
-@import "~normalize.css";
+/*
+Please don't write any styles in this file.
+*/
 @import "imports/variables";
 @import "imports/mixins";
+@import "imports/pre-bulma";
 @import "~bulma";
-// ------------------
-// General app styles
-// ------------------
+@import "imports/post-bulma";
 @import "imports/fonts";
 @import "imports/forms";
 @import "imports/global";
-
-//
-
-// -------------------------------------------
-// Please don't write any styles in this file.
-// -------------------------------------------
