@@ -1,7 +1,7 @@
 <template>
     <div class="PageBuilder">
-        <div v-if="$store.state.page && $store.state.page.acf">
-            <div v-for="block of $store.state.page.acf.content_block.value">
+        <div v-if="$store.state.post && $store.state.post.acf">
+            <div v-for="block of $store.state.post.acf.content_block.value">
 
                 <example v-if="block.acf_fc_layout === 'example'" :content="block"></example>
 

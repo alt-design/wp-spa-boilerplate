@@ -1,9 +1,9 @@
 <template>
-    <main class="App">
+    <main>
 
         <app-header></app-header>
 
-        <transition name="fade" mode="out-in" appear>
+        <transition name="app" mode="out-in" appear>
             <router-view :key="$route.fullPath"></router-view>
         </transition>
 
@@ -13,22 +13,25 @@
 </template>
 
 <script type="text/babel">
+    import AppHeader from './Components/Header/Header'
+    import AppFooter from './Components/Footer/Footer'
+
     export default{
         components: {
-            appHeader: require('./components/Header/Header.vue'),
-            appFooter: require('./components/Header/Header.vue'),
+            AppHeader,
+            AppFooter
         }
-    };
+    }
 </script>
 
 <style lang="scss" scoped>
 
-    .fade-enter-active, .fade-leave-active {
-        transition : opacity .5s
+    .app-enter-active, .app-leave-active {
+        transition: opacity .5s
     }
 
-    .fade-enter, .fade-leave-active {
-        opacity : 0
+    .app-enter, .app-leave-active {
+        opacity: 0
     }
 
 </style>

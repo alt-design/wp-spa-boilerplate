@@ -1,3 +1,3 @@
 export default {
-    // actions
+  // Actions
 }

@@ -1,19 +1,19 @@
-const webpack = require('webpack');
+const webpack = require('webpack')
 
 // User Settings
 const settings = {
   entry: [
-    './src/main'
+    './src/Main'
   ],
   output: {
     path: __dirname + '/dist/',
     publicPath: '/dist/',
     filename: 'bundle.js'
   }
-};
+}
 
 // If add the webpack-hot-middleware client for hot reloading if necessary.
-if (process.argv.indexOf('useDevMiddleware') > -1) settings.entry.unshift('webpack-hot-middleware/client');
+if (process.argv.indexOf('useDevMiddleware') > -1) settings.entry.unshift('webpack-hot-middleware/client')
 
 // Webpack 2 Config
 module.exports = {
@@ -57,4 +57,4 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
-};
+}

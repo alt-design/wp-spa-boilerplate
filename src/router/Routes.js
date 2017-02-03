@@ -1,22 +1,22 @@
-import Home from '../views/Home/Home';
-import Page from '../views/Page/Page';
+import Home from '../Views/Home/Home'
+import Page from '../Views/Page/Page'
 
-const routes = [
-    {
-        path     : '/',
-        component: Home,
-        name     : 'Home'
-    },
-    {
-        path     : '/:slug/',
-        component: Page,
-        name     : 'Page'
-    },
-    {
-        path     : '/:slug/:childSlug/',
-        component: Page,
-        name     : 'SubPage'
-    }
-];
+const Routes = [
+  {
+    path: '/',
+    component: Home,
+    name: 'Home'
+  },
+  {
+    path: '/:slug/',
+    component: Page,
+    name: 'Page'
+  },
+  {
+    path: '/:slug/:childSlug/',
+    component: Page,
+    name: 'SubPage'
+  }
+]
 
-export default routes
+export default Routes

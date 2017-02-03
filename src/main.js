@@ -2,35 +2,37 @@
  * This is the main JavaScript file, it hosts all of our imports and also the main Vue instance.
  * =============================== */
 // imports
-import Vue from 'vue';
-import VueLazy from 'vue-lazyload';
-import store from './vuex/store';
-import App from './App.vue';
-import router from './router/Router';
-import Ready from './imports/Ready';
-import './assets/scss/main.scss';
-import axios from 'axios';
+import Vue from 'vue'
+import VueLazy from 'vue-lazyload'
+import axios from 'axios'
+import store from './Vuex/Store'
+import router from './Router/Router'
+import Ready from './Imports/Ready'
+import App from './App'
+import AppMenu from './Components/Menus/AppMenu'
+import AppMenuItem from './Components/Menus/AppMenuItem'
+
+import './Assets/SCSS/main.scss'
 
 // Vue Plugins
-Vue.use(VueLazy);
+Vue.use(VueLazy)
 
 Vue.prototype.$http = axios.create({
-  baseURL: Ready.getSiteURL(),
-});
+  baseURL: Ready.getSiteURL()
+})
 
 // Register Global Components this way. They bind to Vue, not the main Vue Instance
-Vue.component('app-menu', require('./components/Menus/AppMenu'));
-Vue.component('app-menu-item', require('./components/Menus/AppMenuItem'));
-Vue.component('container', require('./components/Container/Container'));
+Vue.component('app-menu', AppMenu)
+Vue.component('app-menu-item', AppMenuItem)
 
 // Main vue instance
-window.Vue = new Vue({
+new Vue({
   el: '#app',
   store,
   router,
-  mounted(){
-    new Ready();
+  mounted () {
+    new Ready()
   },
   render: h => h(App)
-});
+})
 

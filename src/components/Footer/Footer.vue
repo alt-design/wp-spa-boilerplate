@@ -1,7 +1,7 @@
 <template>
-    <footer class="footer">
+    <footer>
 
-        <h1>This is an example footer</h1>
+        <h1>Footer</h1>
 
         <!--<app-menu location="some footer location"></app-menu>-->
 
@@ -11,13 +11,7 @@
 <script type="text/babel">
     export default{
         data(){
-            return {};
+            return {}
         }
-    };
-</script>
-
-<style lang="scss" scoped rel="stylesheet/scss">
-    .footer {
-
     }
-</style>
+</script>

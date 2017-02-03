@@ -1,10 +1,10 @@
 <template>
     <div class="Breadcrumbs">
-        <router-link v-if="$store.state.page.breadcrumbs"
-                     v-for="breadcrumb of $store.state.page.breadcrumbs"
+        <router-link v-if="$store.state.post.breadcrumbs"
+                     v-for="breadcrumb of $store.state.post.breadcrumbs"
                      class="Breadcrumbs__breadcrumb"
                      :class="{
-                        'Breadcrumbs__breadcrumb--active' : $store.state.page.post_title === breadcrumb.title
+                        'Breadcrumbs__breadcrumb--active' : $store.state.post.post_title === breadcrumb.title
                       }"
                      :to="'/' + relativeLink(breadcrumb.permalink)"
         >
@@ -18,21 +18,22 @@
         methods: {
             relativeLink(link){
                 if (link) {
-                    return link.replace(this.$store.state.url, '');
+                    return link.replace(this.$store.state.url, '')
                 }
             }
         }
     }
 </script>
 
-<style lang="sass" rel="stylesheet/scss">
-    @import '../../assets/scss/imports/variables';
-    @import '../../assets/scss/imports/mixins';
+<style lang="scss" rel="stylesheet/scss">
+    @import '../../Assets/SCSS/Imports/variables';
+    @import '../../Assets/SCSS/Imports/mixins';
 
     .Breadcrumbs {
 
         &__breadcrumb {
 
         }
+
     }
 </style>

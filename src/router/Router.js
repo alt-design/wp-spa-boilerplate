@@ -1,43 +1,40 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import jump from 'jump.js';
-import routes from './Routes';
-import store from '../vuex/store';
-import Functions from '../imports/Functions';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Jump from 'jump.js'
+import routes from './Routes'
+import Store from '../Vuex/Store'
+import Functions from '../Imports/Functions'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 // Main Router Instance
 const router = new VueRouter({
   routes,
   mode: 'history'
-});
+})
 
 // Run before each route change
 router.beforeEach((to, from, next) => {
-
-  jump('html', {
+  Jump('html', {
     duration: window.pageYOffset > 10 ? 500 : 0,
-    callback(){
-      new Promise(resolve => {
-        store.commit('updatePage', (to.fullPath ? to.fullPath : 'home'));
-        resolve();
+    callback () {
+      new Promise((resolve) => {
+        Store.commit('updatePost', (to.fullPath ? to.fullPath : 'home'))
+        resolve()
       }).then(() => {
         /*
-         * Check if the URL we're visiting is a preview and then get the appropriate data by a new request.
-         * The queryAll endpoint kills the current request if it's a preview
+         * Check if the URL we're visiting is a preview, request preview if true
          * */
-        if (to.fullPath.indexOf('preview=true') > -1) store.commit('updatePageById', (Functions.getUrlParams().p));
-      });
+        if (to.fullPath.indexOf('preview=true') > -1) Store.commit('updatePostById', (Functions.getUrlParams().p))
+      })
 
-      next();
+      next()
     }
-  });
-});
-
+  })
+})
 
 // Run after each route change
 // router.afterEach((to, from) => {
 // });
 
-export default router;
+export default router

@@ -1,6 +1,7 @@
 <template>
-    <header class="header">
-        <h1>This is an example header</h1>
+    <header>
+
+        <h1>Header</h1>
 
         <!--<app-menu location="some header location"></app-menu>-->
 
@@ -10,14 +11,7 @@
 <script type="text/babel">
     export default{
         data(){
-            return {};
+            return {}
         }
-    };
-
-</script>
-
-<style lang="scss" scoped rel="stylesheet/scss">
-    .header {
-
     }
-</style>
+</script>

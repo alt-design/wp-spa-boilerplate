@@ -1,8 +1,7 @@
 <template>
-    <div class="Home" v-if="$store.state.page">
+    <div class="Home" v-if="$store.state.post">
 
-        <p>This is a home page template, you are currently viewing:</p>
-        <h1 v-if="$store.state.page.post_title">{{$store.state.page.post_title}}</h1>
+        <p>You are currently viewing the {{$store.state.post.post_title}} page. Edit this template - ~/src/Views/Home/Home.vue</p>
 
         <!--<page-builder></page-builder>-->
 
@@ -10,15 +9,11 @@
 </template>
 
 <script type="text/babel">
+    import PageBuilder from '../../Components/PageBuilder/PageBuilder'
+
     export default{
         components: {
-            pageBuilder: require('../../components/PageBuilder/PageBuilder.vue')
+            PageBuilder
         }
-    };
-
-
+    }
 </script>
-
-<style lang="scss" scoped rel="stylesheet/scss">
-
-</style>
