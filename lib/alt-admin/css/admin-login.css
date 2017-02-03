@@ -1,0 +1,47 @@
+/**********************************************************************
+
+ADMIN LOGIN
+
+**********************************************************************/
+
+h1 a {
+    background-image: url('../images/admin-logo.png') !important;
+    background-size: 320px 110px !important;
+    height: 110px !important;
+    width: 320px !important;
+}
+
+.login #nav a,
+.login #backtoblog a,
+.login .mysp-login-extras a {
+    color: #333333 !important;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.login #nav a:hover,
+.login #backtoblog a:hover,
+.login .mysp-login-extras a:hover {
+    color: #FF6600 !important;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.wp-core-ui .button-primary {
+    background: #FF6600 !important;
+    border-color: #E45A00 !important;
+    -webkit-box-shadow: inset 0 1px 0 #FF9335, 0 1px 0 rgba(0, 0, 0, .15) !important;
+    box-shadow: inset 0 1px 0 #FF9335, 0 1px 0 rgba(0, 0, 0, .15) !important;
+}
+
+.wp-core-ui .button-primary.focus,
+.wp-core-ui .button-primary.hover,
+.wp-core-ui .button-primary:focus,
+.wp-core-ui .button-primary:hover {
+    background: #E45A00 !important;
+    border-color: #E45A00 !important;
+    -webkit-box-shadow: inset 0 1px 0 #EE8C45 !important;
+    box-shadow: inset 0 1px 0 #EE8C45 !important;
+}
+
+#wp-submit {
+    text-shadow: none !important;
+}
