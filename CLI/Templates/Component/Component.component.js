@@ -1,8 +1,8 @@
 /**
  * ComponentName
  *
- * @template : ./ComponentName.html
- * @style : ./ComponentName.scss
+ * @template : ./ComponentName.component.html
+ * @style : ./ComponentName.component.scss
  */
 
 const ComponentName = {
