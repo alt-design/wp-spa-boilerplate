@@ -5,7 +5,9 @@ const http = require('http')
 const express = require('express')
 const app = express()
 const axios = require('axios')
+const fs = require('fs')
 const webpackDevMiddleware = require('webpack-dev-middleware')
+let refreshCount = 0
 
 /* ---------------------------------
  * Options
@@ -38,15 +40,39 @@ const options = {
   app.use(require('webpack-hot-middleware')(compiler))
 })()
 
-axios.get(options.siteUrl)
+function servingMessage () {
+  console.log(`Webpack Dev Server @ Port ${options.portNumber}`)
+  console.log('- - - -')
+  console.log(`Refreshed ${refreshCount} ${refreshCount > 1 ? 'times' : 'time'} at ${(new Date).toTimeString().slice(0, 8)}`)
+}
 
-app.get('*', function (req, res) {
-  res.sendFile(__dirname + '/webpackTemp.html')
+// Just to stop logging of favicon requests
+app.get('/favicon.ico', () => {})
+
+// Handle all other requests
+app.get('*', (req, res) => {
+  refreshCount = refreshCount + 1
+
+  // Clear the console
+  console.log('\033[2J')
+
+  new Promise(resolve => {
+    // Send the request to build webpackTemp.html
+    axios.get(options.siteUrl)
+
+    // Once webpackTemp.html has been updated, resolve the promise
+    fs.watch(__dirname + '/webpackTemp.html', () => {
+      resolve()
+    })
+  }).then(() => {
+    // Server webpackTemp.html
+    res.sendFile(__dirname + '/webpackTemp.html')
+  }).then(() => {
+    // Logging stuff
+    servingMessage()
+  })
 })
 
-const server = http.createServer(app)
-
-server.listen(options.portNumber, () => {
-  console.log('\r\nListening on port: ' + options.portNumber)
-})
+// Init the server
+http.createServer(app).listen(options.portNumber)
 
