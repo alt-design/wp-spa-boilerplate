@@ -1,0 +1,8 @@
+<div class="breadcrumbs" v-if="$store.state.post.breadcrumbs">
+    <router-link v-for="breadcrumb of $store.state.post.breadcrumbs"
+                 class="breadcrumbs__breadcrumb"
+                 :class="{'breadcrumbs__breadcrumb--active' : $store.state.post.post_title === breadcrumb.title}"
+                 :to="'/' + relativeLink(breadcrumb.permalink)">
+        <span>{{breadcrumb.title}}</span>
+    </router-link>
+</div>

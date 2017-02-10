@@ -3,6 +3,8 @@
 
         <app-header></app-header>
 
+        <breadcrumbs></breadcrumbs>
+
         <transition name="app" mode="out-in" appear>
             <router-view :key="$route.fullPath"></router-view>
         </transition>
@@ -13,15 +15,7 @@
 </template>
 
 <script type="text/babel">
-    import AppHeader from './Components/Header/Header'
-    import AppFooter from './Components/Footer/Footer'
-
-    export default{
-        components: {
-            AppHeader,
-            AppFooter
-        }
-    }
+  export default{}
 </script>
 
 <style lang="scss" scoped>

@@ -9,10 +9,10 @@ import store from './Vuex/Store'
 import router from './Router/Router'
 import Ready from './Imports/Ready'
 import App from './App'
-import AppMenu from './Components/Menus/AppMenu'
-import AppMenuItem from './Components/Menus/AppMenuItem'
-
+import RegisterComponents from './Imports/ComponentRegistry'
 import './Assets/SCSS/main.scss'
+
+RegisterComponents()
 
 // Vue Plugins
 Vue.use(VueLazy)
@@ -20,10 +20,6 @@ Vue.use(VueLazy)
 Vue.prototype.$http = axios.create({
   baseURL: Ready.getSiteURL()
 })
-
-// Register Global Components this way. They bind to Vue, not the main Vue Instance
-Vue.component('app-menu', AppMenu)
-Vue.component('app-menu-item', AppMenuItem)
 
 // Main vue instance
 new Vue({

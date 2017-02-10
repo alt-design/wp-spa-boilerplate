@@ -1,0 +1,5 @@
+{
+  "name": "app-menu",
+  "version": "1.0.0",
+  "main": "AppMenu.component.vue"
+}
