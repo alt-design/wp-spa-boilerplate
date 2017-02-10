@@ -31,9 +31,6 @@ const options = {
     noInfo: true,
     quiet: true,
     publicPath: webpackConfig.output.publicPath,
-    stats: {
-      colors: true
-    }
   }))
 
   // Step 3: Attach the hot middleware to the compiler & the server
@@ -42,8 +39,8 @@ const options = {
 
 function servingMessage () {
   console.log(`Webpack Dev Server @ Port ${options.portNumber}`)
-  console.log('- - - -')
   console.log(`Refreshed ${refreshCount} ${refreshCount > 1 ? 'times' : 'time'} at ${(new Date).toTimeString().slice(0, 8)}`)
+  console.log('- - - -')
 }
 
 // Just to stop logging of favicon requests
@@ -52,9 +49,6 @@ app.get('/favicon.ico', () => {})
 // Handle all other requests
 app.get('*', (req, res) => {
   refreshCount = refreshCount + 1
-
-  // Clear the console
-  console.log('\033[2J')
 
   new Promise(resolve => {
     // Send the request to build webpackTemp.html
