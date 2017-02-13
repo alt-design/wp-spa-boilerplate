@@ -56,7 +56,7 @@ app.get('*', (req, res) => {
 
     // Once webpackTemp.html has been updated, resolve the promise
     fs.watch(__dirname + '/webpackTemp.html', () => {
-      resolve()
+      setTimeout(() => { resolve() }, 250)
     })
   }).then(() => {
     // Server webpackTemp.html
