@@ -1,26 +1,29 @@
+const env = require('dotenv').config()
 const webpack = require('webpack')
 
 // User Settings
 const settings = {
   entry: [
-    './src/Main'
+    `./src/${env.parsed.ENTRY}`
   ],
   output: {
-    path: __dirname + '/dist/',
-    publicPath: '/dist/',
-    filename: 'bundle.js'
+    JavaScript: {
+      path: __dirname + '/dist/',
+      publicPath: '/dist/',
+      filename: env.parsed.OUTPUT
+    }
   }
 }
 
 // If add the webpack-hot-middleware client for hot reloading if necessary.
-if (process.argv.indexOf('useDevMiddleware') > -1) settings.entry.unshift('webpack-hot-middleware/client')
+process.argv.includes('useDevMiddleware') && settings.entry.unshift('webpack-hot-middleware/client')
 
 // Webpack 2 Config
 module.exports = {
   entry: settings.entry,
-  output: settings.output,
+  output: settings.output.JavaScript,
   resolve: {
-    extensions: ['.webpack.js', '.web.js', '.js', '.vue']
+    extensions: ['.js', '.vue']
   },
   module: {
     rules: [
@@ -31,22 +34,22 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
         options: {
           loaders: {
-            scss: 'style!css!sass'
+            scss: 'style-loader!css-loader!sass-loader'
           }
         }
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass'
+        loader: 'style-loader!css-loader!sass-loader'
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+          'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+          'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
         ]
       }
     ]
@@ -55,6 +58,6 @@ module.exports = {
     new webpack.ProgressPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 }
