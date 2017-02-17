@@ -1,7 +1,7 @@
 <?php
-/* ---------------------------------
- * Some things we may need for our App
- * --------------------------------- */
+/**
+ * Some things we may need for our App to be included after the opening body tag
+ */
 ?>
 
 <div style="display: none">

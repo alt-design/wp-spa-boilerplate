@@ -1,9 +1,9 @@
 <?php
-/*
+/**
  * This theme has to write a HTML file (webpackTemp.html) for the WebPack dev server to run from,
  * hence the ob_start and file writing. Should any of your .php files change, the dev server will reload
  * and the below code will write to a HTML file again.
- * */
+ */
 
 ob_start();
 ?>
