@@ -1,0 +1,13 @@
+<main class="app">
+
+    <app-header></app-header>
+
+    <breadcrumbs></breadcrumbs>
+
+    <transition name="app" mode="out-in" appear>
+        <router-view :key="$route.fullPath"></router-view>
+    </transition>
+
+    <app-footer></app-footer>
+
+</main>

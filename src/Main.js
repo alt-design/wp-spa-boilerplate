@@ -8,7 +8,7 @@ import axios from 'axios'
 import store from './Vuex/Store'
 import router from './Router/Router'
 import Ready from './Imports/Ready'
-import App from './App'
+import App from './Components/App'
 import RegisterComponents from './Imports/ComponentRegistry'
 import './Assets/SCSS/main.scss'
 
