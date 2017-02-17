@@ -65,7 +65,7 @@ class AltThemeEndpoints
      * @param $data
      *
      */
-    public function getArchiveData($data)
+    public static function getArchiveData($data)
     {
 
         $endpoints = new AltThemeEndpoints();
