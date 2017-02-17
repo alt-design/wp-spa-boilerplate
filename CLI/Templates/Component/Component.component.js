@@ -5,7 +5,7 @@
  * @style : ./ComponentName.component.scss
  */
 
-export default ComponentName = {
+export default {
   data () {
     return {
       message: 'ComponentName'

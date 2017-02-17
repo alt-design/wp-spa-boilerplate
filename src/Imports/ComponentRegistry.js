@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export default RegisterComponents = () => {
+const RegisterComponents = () => {
   Vue.component('page-builder', require('../Components/PageBuilder'))
   Vue.component('app-header', require('../Components/Header'))
   Vue.component('app-footer', require('../Components/Footer'))
@@ -8,3 +8,5 @@ export default RegisterComponents = () => {
   Vue.component('app-menu', require('../Components/Menus/AppMenu'))
   Vue.component('app-menu-item', require('../Components/Menus/AppMenuItem'))
 }
+
+export default RegisterComponents

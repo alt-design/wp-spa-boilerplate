@@ -1,6 +1,6 @@
 import Page from '../Views/Page/Page'
 
-export default Routes = [
+const Routes = [
   {
     path: '/',
     component: Page,
@@ -17,3 +17,5 @@ export default Routes = [
     name: 'SubPage'
   }
 ]
+
+export default Routes
