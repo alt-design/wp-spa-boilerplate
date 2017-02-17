@@ -1,14 +1,14 @@
 <?php
 
-/*
+/**
  * This file holds all of the themes required endpoints.
  *
  * If you wish to add more endpoints,
  * please do so in addonEndpoints.php
- * */
-
+ */
 class AltThemeEndpoints
 {
+
 
     /**
      * Get an array of featured image size urls
@@ -81,8 +81,8 @@ class AltThemeEndpoints
             'post_format'
         ];
         $ignoredTerms = [
-//            'Uncategorized',
-//            'Uncategorised'
+            // 'Uncategorized',
+            // 'Uncategorised'
         ];
 
         foreach (get_object_taxonomies($data['post_type']) as $tax) {
