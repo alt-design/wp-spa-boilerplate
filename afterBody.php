@@ -4,7 +4,7 @@
  */
 ?>
 
-<div style="display: none">
+<div style="display:none;">
     <span id="url"><?php echo blogInfo('url') ?></span>
     <span id="a-url"><?php echo get_admin_url() ?></span>
     <span id="pageId"><?php the_id() ?></span>
