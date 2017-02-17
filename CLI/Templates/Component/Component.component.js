@@ -5,12 +5,10 @@
  * @style : ./ComponentName.component.scss
  */
 
-const ComponentName = {
+export default ComponentName = {
   data () {
     return {
       message: 'ComponentName'
     }
   }
 }
-
-export default ComponentName
