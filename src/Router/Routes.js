@@ -1,10 +1,9 @@
-import Home from '../Views/Home/Home'
 import Page from '../Views/Page/Page'
 
-const Routes = [
+export default Routes = [
   {
     path: '/',
-    component: Home,
+    component: Page,
     name: 'Home'
   },
   {
@@ -18,5 +17,3 @@ const Routes = [
     name: 'SubPage'
   }
 ]
-
-export default Routes
