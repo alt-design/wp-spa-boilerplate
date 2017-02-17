@@ -1,6 +1,6 @@
-/* ===============================
+/**
  * This is the main JavaScript file, it hosts all of our imports and also the main Vue instance.
- * =============================== */
+ * */
 // imports
 import Vue from 'vue'
 import VueLazy from 'vue-lazyload'
