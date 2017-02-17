@@ -1,4 +1,4 @@
-import Page from '../Views/Page/Page'
+import Page from '../Components/Views/Page'
 
 const Routes = [
   {
