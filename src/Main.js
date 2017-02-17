@@ -1,7 +1,7 @@
 /**
  * This is the main JavaScript file, it hosts all of our imports and also the main Vue instance.
- * */
-// imports
+ */
+// Imports
 import Vue from 'vue'
 import VueLazy from 'vue-lazyload'
 import axios from 'axios'
@@ -14,14 +14,18 @@ import './Assets/SCSS/main.scss'
 
 RegisterComponents()
 
-// Vue Plugins
+/**
+ * Vue Setup
+ */
 Vue.use(VueLazy)
 
 Vue.prototype.$http = axios.create({
   baseURL: Ready.getSiteURL()
 })
 
-// Main vue instance
+/**
+ * Main Vue Instance
+ */
 new Vue({
   el: '#app',
   store,
