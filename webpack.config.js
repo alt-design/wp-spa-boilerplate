@@ -4,6 +4,7 @@ const webpack = require('webpack')
 // User Settings
 const settings = {
   entry: [
+    'babel-polyfill', // Babel Polyfill is required by VueX for Promises in IE
     `./src/${env.parsed.ENTRY}`
   ],
   output: {
@@ -37,13 +38,13 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            scss: 'style-loader!css-loader!sass-loader'
+            scss: 'style-loader!css-loader!sass-loader!postcss-loader'
           }
         }
       },
       {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader'
+        loader: 'style-loader!css-loader!sass-loader!postcss-loader'
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
