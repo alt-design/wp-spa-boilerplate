@@ -166,9 +166,7 @@ class AltThemeEndpoints
 
 
         // Get any custom fields for this post if ACF is installed
-        if (class_exists('acf') && get_field_objects($id)) {
-            $returnData->acf = get_field_objects($id);
-        }
+        $returnData->acf = (class_exists('acf') && get_field_objects($id)) ? get_field_objects($id) : false;
 
         // Get te featured image stuff
         $returnData->featured_image = AltThemeEndpoints::getFeaturedImg($id);
