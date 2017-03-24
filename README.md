@@ -1,5 +1,8 @@
+![alt tag](https://raw.githubusercontent.com/alt-design/wp-spa-boilerplate/master/screenshot.jpg)
+
 # WordPress Single Page Application Theme Boilerplate
 ##### A JavaScript SPA WordPress theme boilerplate using Vue and the WordPress REST API.
+
 
 ## Install
 Install this theme just as you would install any modern theme boilerplate:
@@ -76,3 +79,4 @@ The menu component is used to retrieve & display WordPress menus:
 The breadcrumb component is used to retrieve & display breadcrumbs for the current path:
 
     <breadcrumbs></breadcrumbs>
+
