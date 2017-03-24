@@ -1,4 +1,2 @@
-# wp-spa-boilerplate
-A JavaScript single page WordPress theme boilerplate using Vue.js and the WordPress REST API.
-
-# It's pretty sexy don't you know.
+# WordPress Single Page Application Theme Boilerplate
+A JavaScript SPA WordPress theme boilerplate using Vue and the WordPress REST API.
