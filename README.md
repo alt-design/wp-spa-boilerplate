@@ -1,8 +1,8 @@
-![alt tag](https://raw.githubusercontent.com/alt-design/wp-spa-boilerplate/master/screenshot.jpg)
-
 # WordPress Single Page Application Theme Boilerplate
 ##### A JavaScript SPA WordPress theme boilerplate using Vue and the WordPress REST API.
 
+
+<img src="https://raw.githubusercontent.com/alt-design/wp-spa-boilerplate/master/screenshot.jpg" width="400"/>
 
 ## Install
 Install this theme just as you would install any modern theme boilerplate:
