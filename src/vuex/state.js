@@ -1,7 +1,8 @@
 export default {
-  theme: '',
-  url: '',
   adminUrl: '',
+  global: {},
+  theme: '',
   name: '',
-  post: {}
+  post: {},
+  url: ''
 }

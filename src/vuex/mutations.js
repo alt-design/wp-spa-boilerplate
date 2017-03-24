@@ -3,6 +3,10 @@ import Functions from '../imports/Functions'
 
 export default {
 
+  setGlobalOptions (state, data) {
+    state.global = data
+  },
+
   setThemeDir (state, string) {
     state.theme = string
   },

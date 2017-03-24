@@ -1,19 +1,27 @@
 import store from '../vuex/store'
+import axios from 'axios'
 
 export default class Ready {
   constructor () {
+    Ready.setGlobalOptions()
     Ready.setThemeDir()
     Ready.setSiteURL()
     Ready.setName()
     Ready.setAdminURL()
   }
 
-  static setSiteURL () {
-    store.commit('setSiteURL', Ready.getSiteURL())
+  static setGlobalOptions () {
+    axios.get(`${Ready.getSiteURL()}/wp-json/alt/v1/global-acf`).then(res => {
+      store.commit('setGlobalOptions', res.data)
+    })
   }
 
   static setAdminURL () {
     store.commit('setAdminURL', document.getElementById('a-url').innerHTML)
+  }
+
+  static setSiteURL () {
+    store.commit('setSiteURL', Ready.getSiteURL())
   }
 
   static getSiteURL () {

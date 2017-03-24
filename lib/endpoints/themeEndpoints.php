@@ -35,6 +35,22 @@ class AltThemeEndpoints
     }
 
     /**
+     * Returns ACF Global Fields
+     *
+     *
+     * @return array|bool
+     */
+    public static function getACFGlobalOptions()
+    {
+        // Get any global custom fields if ACF is installed
+        if (class_exists('acf') && get_field_objects('option')) {
+            return get_field_objects('option');
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Gets all taxonomy and term data
      *
      * @param $id
@@ -152,11 +168,6 @@ class AltThemeEndpoints
         // Get any custom fields for this post if ACF is installed
         if (class_exists('acf') && get_field_objects($id)) {
             $returnData->acf = get_field_objects($id);
-        }
-
-        // Get any global custom fields if ACF is installed
-        if (class_exists('acf') && get_field_objects('option')) {
-            $returnData->global = get_field_objects('option');
         }
 
         // Get te featured image stuff
@@ -327,14 +338,14 @@ class AltThemeEndpoints
 }
 
 
-/*
+/**
  * Endpoints are registered on rest_api_init
- * */
+ */
 add_action('rest_api_init', function () {
 
-    /*
+    /**
      * Endpoint for getting post data by ID or slug
-     * */
+     */
     register_rest_route('alt/v1', '/all', [
         'methods' => 'GET',
         'callback' => ['AltThemeEndpoints', 'queryAll'],
@@ -348,9 +359,17 @@ add_action('rest_api_init', function () {
         ],
     ]);
 
-    /*
+    /**
+     * Endpoint for getting ACF options page data
+     */
+    register_rest_route('alt/v1', '/global-acf', [
+        'methods' => 'GET',
+        'callback' => ['AltThemeEndpoints', 'getACFGlobalOptions'],
+    ]);
+
+    /**
      * Endpoint for getting Featured Images
-     * */
+     */
     register_rest_route('alt/v1', '/featured-image', [
         'methods' => 'GET',
         'callback' => ['AltThemeEndpoints', 'returnFeaturedImg'],
@@ -361,9 +380,9 @@ add_action('rest_api_init', function () {
         ]
     ]);
 
-    /*
+    /**
      * Endpoint for getting All posts of a certain post type
-     * */
+     */
     register_rest_route('alt/v1', '/archive', [
         'methods' => 'GET',
         'callback' => ['AltThemeEndpoints', 'getArchiveData'],
