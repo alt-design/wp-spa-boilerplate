@@ -26,7 +26,6 @@ app.get('/favicon.ico', () => {})
 
 // Handle all other requests
 app.get('*', (req, res) => {
-
   new Promise(resolve => {
     // Send the request to build webpackTemp.html
     axios.get(env.parsed.DEV_URL)
@@ -45,4 +44,3 @@ app.get('*', (req, res) => {
  * Initiate the server
  */
 http.createServer(app).listen(env.parsed.PORT)
-

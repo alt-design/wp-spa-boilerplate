@@ -1,0 +1,11 @@
+<main class="app" v-if="Object.keys($store.state.post).length">
+
+    <app-header></app-header>
+
+    <transition name="app" mode="out-in" appear>
+        <router-view :key="$route.fullPath"></router-view>
+    </transition>
+
+    <app-footer></app-footer>
+
+</main>

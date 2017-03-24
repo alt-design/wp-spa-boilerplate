@@ -1,0 +1,3 @@
+<ul class="menu" :class="location + '__ul'">
+    <app-menu-item v-for="(item,key) of items" :item="item" :key="key" :location="location"></app-menu-item>
+</ul>

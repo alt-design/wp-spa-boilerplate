@@ -13,7 +13,8 @@ const settings = {
       publicPath: '/dist/',
       filename: env.parsed.OUTPUT
     }
-  }
+  },
+  scssLoaders: 'style-loader!css-loader!sass-loader!postcss-loader'
 }
 
 // If add the webpack-hot-middleware client for hot reloading if necessary.
@@ -38,20 +39,13 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            scss: 'style-loader!css-loader!sass-loader!postcss-loader'
+            scss: settings.scssLoaders
           }
         }
       },
       {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader!postcss-loader'
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
-        ]
+        loader: settings.scssLoaders
       }
     ]
   },
