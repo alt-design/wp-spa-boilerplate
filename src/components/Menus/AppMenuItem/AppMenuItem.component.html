@@ -1,4 +1,4 @@
-<li :class="[location + '__ul__li', item.classes && item.classes, item.children.length > 0 && 'has-children']">
+<li :class="[location + '__ul__li', item.classes && item.classes, item.children.length && 'has-children']">
     <router-link :class="location + '__ul__li__a'"
                  :to="getSlug(item.url)"
                  :target="item.target"
