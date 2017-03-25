@@ -4,7 +4,7 @@
     "watch": "webpack -w",
     "dev": "node server.js useDevMiddleware",
     "production": "webpack -p",
-    "component": "node ./CLI/Scripts/ComponentGenerator.js"
+    "component": "node ./cli/scripts/componentGenerator.js"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.6",
