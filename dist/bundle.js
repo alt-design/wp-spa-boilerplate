@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1b23999509483a7ed5eb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "de115658ea0e9044601e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -12948,6 +12948,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_1_vue__["default"].prototype.$http = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
   baseURL: __WEBPACK_IMPORTED_MODULE_5__imports_ready__["a" /* default */].getSiteURL()
 });
+
+// Used to generate relative URL's from absolute
+// URL's for use with Vue Router
+__WEBPACK_IMPORTED_MODULE_1_vue__["default"].prototype.$relativeUrl = function (url) {
+  return url.replace(__WEBPACK_IMPORTED_MODULE_7__vuex_store__["a" /* default */].state.url, '');
+};
 
 /**
  * Main Vue Instance
