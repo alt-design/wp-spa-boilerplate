@@ -4,6 +4,11 @@
 
 <img src="https://raw.githubusercontent.com/alt-design/wp-spa-boilerplate/master/screenshot.jpg" width="400"/>
 
+<a href="https://github.com/feross/standard" target="_blank">
+        <img src="https://cdn.rawgit.com/feross/standard/master/badge.svg" alt="JS Standard Style"/>
+</a>
+
+
 ## Install
 Install this theme just as you would install any modern theme boilerplate:
 
