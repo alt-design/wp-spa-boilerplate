@@ -79,4 +79,3 @@ The menu component is used to retrieve & display WordPress menus:
 The breadcrumb component is used to retrieve & display breadcrumbs for the current path:
 
     <breadcrumbs></breadcrumbs>
-
