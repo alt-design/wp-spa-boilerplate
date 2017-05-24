@@ -1,5 +1,19 @@
 <li :class="[location + '__ul__li', item.classes && item.classes, item.children.length && 'has-children']">
-    <router-link :class="location + '__ul__li__a'"
+
+    <a v-if="item.url.includes('tel:') || item.url.includes('mailto:')"
+       :href="item.url"
+       :class="location + '__ul__li__a'"
+       :title="item.title"
+       v-html="item.title">
+    </a>
+
+    <a v-else-if="item.url === '#' || item.url === ''"
+       :class="location + '__ul__li__a'"
+       v-html="item.title">
+    </a>
+
+    <router-link v-else
+                 :class="location + '__ul__li__a'"
                  :to="$relativeUrl(item.url)"
                  :target="item.target"
                  :title="item.title"
