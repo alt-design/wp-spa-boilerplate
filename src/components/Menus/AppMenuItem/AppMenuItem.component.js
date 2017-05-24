@@ -13,10 +13,5 @@ export default {
       type: Number,
       default: 0
     }
-  },
-  methods: {
-    getSlug (string) {
-      return string.replace(this.$store.state.url, '', string)
-    }
   }
 }

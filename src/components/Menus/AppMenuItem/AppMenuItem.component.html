@@ -1,6 +1,6 @@
 <li :class="[location + '__ul__li', item.classes && item.classes, item.children.length && 'has-children']">
     <router-link :class="location + '__ul__li__a'"
-                 :to="getSlug(item.url)"
+                 :to="$relativeUrl(item.url)"
                  :target="item.target"
                  :title="item.title"
                  v-html="item.title"
@@ -9,7 +9,7 @@
 
     <!--submenu-->
     <ul :class="location + '__ul'" v-if="item.children.length > 0">
-        <app-menu-item v-for="(item,key) of item.children" :item="item" :location="location"
+        <app-menu-item v-for="(item,key) of item.children" :item="item" :location="location" :key="key"
                        :depth="depth + 1"></app-menu-item>
     </ul>
     <!--/end submenu-->
