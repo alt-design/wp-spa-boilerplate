@@ -31,7 +31,7 @@ export default {
   updatePost (state, newPath) {
     Http.get(state.url + '/wp-json/alt/v1/all?slug=' + newPath).then(res => {
       state.post = res.data
-      document.title = res.data.post_title + ' | ' + state.name
+      document.title = res.data.post_title + ' - ' + state.name
 
       Functions.updateAdminBar()
     }, res => {

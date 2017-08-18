@@ -15,7 +15,6 @@ ob_start();
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title><?php echo get_the_title() . " | " . get_bloginfo('name'); ?></title>
         <?php wp_head(); ?>
     </head>
 
@@ -30,5 +29,6 @@ ob_start();
 
 <?php
 $html = fopen(__DIR__ . '/webpackTemp.html', 'w+');
-fwrite($html, str_replace('=\'' . get_stylesheet_directory_uri(), '=\'', str_replace('="' . get_stylesheet_directory_uri(), '"', ob_get_contents())));
+fwrite($html, str_replace('=\'' . get_stylesheet_directory_uri(), '=\'',
+    str_replace('="' . get_stylesheet_directory_uri(), '"', ob_get_contents())));
 fclose($html);

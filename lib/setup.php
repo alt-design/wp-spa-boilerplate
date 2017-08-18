@@ -21,6 +21,19 @@ function my_theme_dependencies()
 
 
 /**
+ * Tell WordPress to manage our page titles (JS will take over after initial load)
+ *
+ *
+ */
+function theme_slug_setup()
+{
+    add_theme_support('title-tag');
+}
+
+add_action('after_setup_theme', 'theme_slug_setup');
+
+
+/**
  * Allow cross origin requests, necessary for our webpack dev server
  *
  *
@@ -62,7 +75,8 @@ function alt_enqueue_frontend_scripts_styles()
 {
 //        wp_enqueue_script('jquery', null, null, null, true);
     wp_enqueue_script('MainJs', get_template_directory_uri() . '/dist/bundle.js', null, null, true);
-    wp_enqueue_style('FontAwesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css', null, null, null);
+    wp_enqueue_style('FontAwesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',
+        null, null, null);
 }
 
 
