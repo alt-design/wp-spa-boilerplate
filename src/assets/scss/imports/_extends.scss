@@ -1,0 +1,28 @@
+// Reusable chunks of styling, this is to promote DRYNESS.
+
+// Font Colors
+%color--body {
+  color: $color--body;
+}
+
+// Line Heights
+%line-height--body {
+  line-height: $line-height--body;
+}
+
+%line-height--title {
+  line-height: $line-height--title;
+}
+
+%line-height--compact {
+  line-height: $line-height--compact;
+}
+
+// Hover Effects
+%hover--opacity {
+  transition: .25s;
+
+  &:hover {
+    opacity: .75;
+  }
+}

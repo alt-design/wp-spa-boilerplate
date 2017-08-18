@@ -14,8 +14,10 @@ Vue.prototype.$http = axios.create({
   baseURL: Ready.getSiteURL()
 })
 
-// Used to generate relative URL's from absolute
-// URL's for use with Vue Router
+/**
+ * Used to generate relative URL's from absolute
+ * URL's for use with Vue Router
+ */
 Vue.prototype.$relativeUrl = url => {
   return url.replace(store.state.url, '')
 }

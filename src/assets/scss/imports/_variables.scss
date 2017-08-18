@@ -1,4 +1,15 @@
-/*
-Variables.
-*/
-$color__alt: #F60;
+// Variables.
+
+// Font Colors
+$color--body: #000;
+
+// Line Heights
+$line-height--body: 1.5;
+$line-height--title: 1.25;
+$line-height--compact: 1;
+
+// Breakpoints
+$breakpoint--xs: 576px;
+$breakpoint--s: 768px;
+$breakpoint--m: 992px;
+$breakpoint--l: 1200px;

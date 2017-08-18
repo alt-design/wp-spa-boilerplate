@@ -1,8 +1,9 @@
-/*
-General App Styles.
-*/
+// General App Styles.
 
 body {
+  @extend %line-height--body;
+  @extend %color--body;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
