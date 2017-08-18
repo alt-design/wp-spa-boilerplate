@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * This file holds all of the themes required endpoints.
  *
@@ -15,24 +16,25 @@ class AltThemeEndpoints
      *
      * @param $id
      *
-     * @return array|null
+     * @return array|void
      */
     public function getFeaturedImg($id)
     {
 
-        if (get_the_post_thumbnail($id)) {
-            $imgArr = [];
-
-            foreach (get_intermediate_image_sizes() as $size) {
-                $imgArr[$size] = wp_get_attachment_image_src(get_post_thumbnail_id($id), $size)[0];
-            }
-
-            return $imgArr;
+        // Check for post thumbnail
+        if (!get_the_post_thumbnail($id)) {
+            return;
         }
 
-        return null;
+        $imgArr = [];
 
+        foreach (get_intermediate_image_sizes() as $size) {
+            $imgArr[$size] = wp_get_attachment_image_src(get_post_thumbnail_id($id), $size)[0];
+        }
+
+        return $imgArr;
     }
+
 
     /**
      * Returns ACF Global Fields
@@ -42,13 +44,14 @@ class AltThemeEndpoints
      */
     public static function getACFGlobalOptions()
     {
-        // Get any global custom fields if ACF is installed
-        if (class_exists('acf') && get_field_objects('option')) {
-            return get_field_objects('option');
-        } else {
+
+        if (!class_exists('acf') || !get_field_objects('option')) {
             return false;
         }
+
+        return get_field_objects('option');
     }
+
 
     /**
      * Gets all taxonomy and term data
@@ -58,11 +61,11 @@ class AltThemeEndpoints
      *
      * @return array
      */
-    public static function getPostTaxTerm($id, $taxs)
+    public static function getPostTaxTerm($id, $taxes)
     {
 
         $returnData = [];
-        foreach ($taxs as $tax) {
+        foreach ($taxes as $tax) {
 
             $returnData[] = [
                 'name' => $tax['name'],
@@ -72,8 +75,8 @@ class AltThemeEndpoints
         }
 
         return $returnData;
-
     }
+
 
     /**
      * Return all posts from any post type
@@ -88,9 +91,9 @@ class AltThemeEndpoints
         $posts = [];
         $taxonomies = [];
         $postIds = get_posts([
-            'posts_per_page' => -1,
             'fields' => 'ids',
-            'post_type' => $data['post_type']
+            'post_type' => $data['post_type'],
+            'showposts' => $data['amount']
         ]);
         $ignoredTaxonomies = [
             'post_tag',
@@ -127,15 +130,16 @@ class AltThemeEndpoints
                 'date' => get_the_date('d F', $postId),
                 'link' => get_the_permalink($postId),
                 'img' => $endpoints->getFeaturedImg($postId),
-                'taxonomies' => AltThemeEndpoints::getPostTaxTerm($postId, $taxonomies)
+                'taxonomies' => AltThemeEndpoints::getPostTaxTerm($postId, $taxonomies),
+                'acf' => $data['acf'] ? get_field_objects($postId) : false
             ];
         }
 
         echo helpers::alt_json_encode(['taxonomies' => $taxonomies, 'posts' => $posts]);
 
         die();
-
     }
+
 
     /**
      * Return Featured Image Array
@@ -148,8 +152,8 @@ class AltThemeEndpoints
 
         var_dump(AltThemeEndpoints::getFeaturedImg($data['id']));
         die();
-
     }
+
 
     /**
      * Collect and return the data for a post from is ID
@@ -163,7 +167,6 @@ class AltThemeEndpoints
 
         // Get WordPress post object
         $returnData = get_post($id) ?? 'No post found with that ID';
-
 
         // Get any custom fields for this post if ACF is installed
         $returnData->acf = (class_exists('acf') && get_field_objects($id)) ? get_field_objects($id) : false;
@@ -222,7 +225,8 @@ class AltThemeEndpoints
         if ($parentId) {
 
             do {
-                array_unshift($breadArr, ['title' => get_the_title($parentId), 'permalink' => get_permalink($parentId)]);
+                array_unshift($breadArr,
+                    ['title' => get_the_title($parentId), 'permalink' => get_permalink($parentId)]);
                 $parentId = wp_get_post_parent_id($parentId);
             } while ($parentId != 0);
 
@@ -295,6 +299,7 @@ class AltThemeEndpoints
         ];
     }
 
+
     /**
      * Returns an Object with everything you need in
      * Just pass it an ID or slug!
@@ -332,7 +337,6 @@ class AltThemeEndpoints
         echo json_encode($AltThemeEndpoints->getPostData(intval($id)));
         die();
     }
-
 }
 
 
@@ -352,10 +356,11 @@ add_action('rest_api_init', function () {
                 'default' => false // Pass a slug
             ],
             'id' => [
-                'default' => false // Or an ID
+                'default' => false
             ]
         ],
     ]);
+
 
     /**
      * Endpoint for getting ACF options page data
@@ -365,6 +370,7 @@ add_action('rest_api_init', function () {
         'callback' => ['AltThemeEndpoints', 'getACFGlobalOptions'],
     ]);
 
+
     /**
      * Endpoint for getting Featured Images
      */
@@ -373,10 +379,11 @@ add_action('rest_api_init', function () {
         'callback' => ['AltThemeEndpoints', 'returnFeaturedImg'],
         'args' => [
             'id' => [
-                'default' => false // Or an ID
+                'default' => false
             ]
         ]
     ]);
+
 
     /**
      * Endpoint for getting All posts of a certain post type
@@ -386,9 +393,14 @@ add_action('rest_api_init', function () {
         'callback' => ['AltThemeEndpoints', 'getArchiveData'],
         'args' => [
             'post_type' => [
-                'default' => false // Or an ID
+                'default' => false
+            ],
+            'amount' => [
+                'default' => -1
+            ],
+            'acf' => [
+                'default' => false
             ]
         ]
     ]);
-
 });

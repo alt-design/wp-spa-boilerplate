@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * Add Actions
+ *
+ *
+ */
+add_action('init', 'add_cors_http_header');
+add_action('admin_notices', 'my_theme_dependencies');
+add_action('after_setup_theme', 'theme_slug_setup');
+add_action('wp_enqueue_scripts', 'alt_enqueue_frontend_scripts_styles');
+
+
+/**
+ * Remove Actions
+ *
+ *
+ */
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action('admin_print_scripts', 'print_emoji_detection_script');
+remove_action('admin_print_styles', 'print_emoji_styles');
+
 
 /**
  * Displays notices for required plugins in WordPress Admin.
@@ -29,8 +50,6 @@ function theme_slug_setup()
 {
     add_theme_support('title-tag');
 }
-
-add_action('after_setup_theme', 'theme_slug_setup');
 
 
 /**
@@ -88,24 +107,3 @@ function alt_enqueue_frontend_scripts_styles()
 if (function_exists('acf_add_options_page')) {
     acf_add_options_page('Global Options');
 }
-
-
-/**
- * Add Actions
- *
- *
- */
-add_action('init', 'add_cors_http_header');
-add_action('admin_notices', 'my_theme_dependencies');
-add_action('wp_enqueue_scripts', 'alt_enqueue_frontend_scripts_styles');
-
-/**
- * Remove Actions
- *
- *
- */
-remove_action('wp_head', 'print_emoji_detection_script', 7);
-remove_action('wp_print_styles', 'print_emoji_styles');
-remove_action('admin_print_scripts', 'print_emoji_detection_script');
-remove_action('admin_print_styles', 'print_emoji_styles');
-
