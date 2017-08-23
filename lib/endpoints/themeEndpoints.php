@@ -162,11 +162,26 @@ class AltThemeEndpoints
      *
      * @return array|null|string|WP_Post
      */
-    public function getPostData($id)
+    public function getPostData($id, $isPreview)
     {
+        // Get WordPress post object or post revision object
+        if (!$isPreview) {
+            $returnData = get_post($id) ?? 'No post found with that ID';
+        } else {
+            // Get array of post revisions for this ID
+            $revisions = wp_get_post_revisions($id);
 
-        // Get WordPress post object
-        $returnData = get_post($id) ?? 'No post found with that ID';
+            if (count($revisions)) {
+                // Get the post data for the latest revision
+                $revisionsValues = array_values($revisions);
+                $returnData = array_shift($revisionsValues);
+
+                // Use the latest revisions ID from now on
+                $id = $returnData->ID;
+            } else {
+                $returnData = 'No post revisions found for that ID. Has the post type got revisions enabled?';
+            }
+        }
 
         // Get any custom fields for this post if ACF is installed
         $returnData->acf = (class_exists('acf') && get_field_objects($id)) ? get_field_objects($id) : false;
@@ -309,20 +324,19 @@ class AltThemeEndpoints
      */
     public static function queryAll($data)
     {
-
-        // If it's a preview, make sure we use the next request (from the previews ID) by killing this one.
-        if (!empty($data['slug']) && isset($_GET['preview'])) {
-            echo 'This is a preview endpoint!';
-            die();
-        }
-
         $AltThemeEndpoints = new AltThemeEndpoints();
+        $isPreview = false;
 
         // Page Search Criteria
         $psc = $AltThemeEndpoints->checkType($data['slug']);
 
-        // If the slug is not empty and isn't "/" (Home page)
-        if (!empty($data['slug'] && $data['slug'] !== '/')) {
+        // If it's a preview, make sure we use the next request (from the previews ID) by killing this one.
+        if (!empty($data['slug']) && isset($_GET['preview'])) {
+            $isPreview = true;
+            // Get the page ID from the preview_id param
+            $id = explode('preview_id=', $_GET['slug'])[1];
+        } // If the slug is not empty and isn't "/" (Home page)
+        elseif (!empty($data['slug'] && $data['slug'] !== '/')) {
             $id = get_page_by_path($psc['slug'], OBJECT, $psc['post_type'])->ID;
         } // If we have an ID instead of a slug
         elseif (!empty($data['id'])) {
@@ -332,9 +346,10 @@ class AltThemeEndpoints
             $id = get_option('page_on_front');
         }
 
+
         // Get and return the content from our narrowed down ID
         // Ensures ID is an integer
-        echo json_encode($AltThemeEndpoints->getPostData(intval($id)));
+        echo json_encode($AltThemeEndpoints->getPostData(intval($id), $isPreview));
         die();
     }
 }

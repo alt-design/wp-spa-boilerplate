@@ -21,9 +21,6 @@ router.beforeEach((to, from, next) => {
       new Promise((resolve) => {
         store.commit('updatePost', (to.fullPath ? to.fullPath : 'home'))
         resolve()
-      }).then(() => {
-        // Check if the URL we're visiting is a preview, request preview if true
-        if (to.fullPath.indexOf('preview=true') > -1) store.commit('updatePostById', (Functions.getUrlParams().p))
       })
 
       next()
