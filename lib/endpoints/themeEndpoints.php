@@ -330,12 +330,24 @@ class AltThemeEndpoints
         // Page Search Criteria
         $psc = $AltThemeEndpoints->checkType($data['slug']);
 
-        // If it's a preview, make sure we use the next request (from the previews ID) by killing this one.
+        // Handle previews and draft pages
         if (!empty($data['slug']) && isset($_GET['preview'])) {
             $isPreview = true;
+            
+            // Insert query params stug in slug into $_GET
+            $urlParts = parse_url($data['slug']);
+            parse_str($urlParts['query'], $params);
+
+            foreach ($params as $key => $value) {
+              if (!isset($_GET[$key])) {
+                $_GET[$key] = $value;
+              }
+            }
+
             // Get the page ID from the preview_id param
-            $id = explode('preview_id=', $_GET['slug'])[1];
-        } // If the slug is not empty and isn't "/" (Home page)
+            $id = $_GET['preview_id'] ?? $_GET['p'];
+        }
+        // If the slug is not empty and isn't "/" (Home page)
         elseif (!empty($data['slug'] && $data['slug'] !== '/')) {
             $id = get_page_by_path($psc['slug'], OBJECT, $psc['post_type'])->ID;
         } // If we have an ID instead of a slug
