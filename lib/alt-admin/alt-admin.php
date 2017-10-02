@@ -1,6 +1,6 @@
 <?php
 
-class alt_admin_branding
+class AltAdminBranding
 {
 
     function __construct()
@@ -9,40 +9,40 @@ class alt_admin_branding
         /**
          * Login functionality
          */
-        add_action('login_enqueue_scripts', array($this, 'alt_login_styles'), 10);
-        add_filter('login_headerurl', array($this, 'alt_login_logo_url'));
-        add_filter('login_errors', array($this, 'alt_failed_login'));
+        add_action('login_enqueue_scripts', array($this, 'altLoginStyles'), 10);
+        add_filter('login_headerurl', array($this, 'altLoginLogoUrl'));
+        add_filter('login_errors', array($this, 'altFailedLogin'));
 
         /**
          * General functionality
          */
-        add_action('admin_init', array($this, 'alt_add_color_scheme'));
-        add_action('admin_enqueue_scripts', array($this, 'alt_admin_styles'));
+        add_action('admin_init', array($this, 'altAddColorScheme'));
+        add_action('admin_enqueue_scripts', array($this, 'altAdminStyles'));
 
         /**
          * Dashboard functionality
          */
-        add_filter('screen_layout_columns', array($this, 'alt_screen_layout_columns'));
-        add_filter('get_user_option_screen_layout_dashboard', array($this, 'alt_screen_layout_dashboard'));
+        add_filter('screen_layout_columns', array($this, 'altScreenLayoutColumns'));
+        add_filter('get_user_option_screen_layout_dashboard', array($this, 'altScreenLayoutDashboard'));
 
         /**
          * Admin bar branding
          */
-        add_action('wp_before_admin_bar_render', array($this, 'alt_remove_wp_logo'), 0);
-        add_filter('admin_bar_menu', array($this, 'alt_replace_howdy'), 25);
+        add_action('wp_before_admin_bar_render', array($this, 'altRemoveWpLogo'), 0);
+        add_filter('admin_bar_menu', array($this, 'altReplaceHowdy'), 25);
 
         /**
          * Footer branding
          */
-        add_filter('admin_footer_text', array($this, 'alt_custom_admin_footer'));
-        add_filter('update_footer', array($this, 'alt_change_footer_version'), 9999);
+        add_filter('admin_footer_text', array($this, 'altCustomAdminFooter'));
+        add_filter('update_footer', array($this, 'altChangeFooterVersion'), 9999);
 
     }
 
     /**
      * Custom login styles
      */
-    function alt_login_styles()
+    function altLoginStyles()
     {
         wp_enqueue_style('alt-admin-login', get_template_directory_uri() . '/lib/alt-admin/css/admin-login.css', false);
     }
@@ -50,7 +50,7 @@ class alt_admin_branding
     /**
      * Custom login logo link url
      */
-    function alt_login_logo_url()
+    function altLoginLogoUrl()
     {
         return 'http://www.alt-design.net/';
     }
@@ -58,7 +58,7 @@ class alt_admin_branding
     /**
      * Change login failed message
      */
-    function alt_failed_login()
+    function altFailedLogin()
     {
         return 'The login information you have entered is incorrect.';
     }
@@ -66,7 +66,7 @@ class alt_admin_branding
     /**
      * Add Alt Design colour scheme
      */
-    function alt_add_color_scheme()
+    function altAddColorScheme()
     {
         wp_admin_css_color(
             'alt-design',
@@ -79,7 +79,7 @@ class alt_admin_branding
     /**
      * Register custom styles & javascripts
      */
-    function alt_admin_styles()
+    function altAdminStyles()
     {
         global $wp_styles;
 
@@ -95,13 +95,13 @@ class alt_admin_branding
     /**
      * Single column dashboard
      */
-    function alt_screen_layout_columns($columns)
+    function altScreenLayoutColumns($columns)
     {
         $columns['dashboard'] = 1;
         return $columns;
     }
 
-    function alt_screen_layout_dashboard()
+    function altScreenLayoutDashboard()
     {
         return 1;
     }
@@ -109,7 +109,7 @@ class alt_admin_branding
     /**
      * Remove WordPress logo from admin bar
      */
-    function alt_remove_wp_logo()
+    function altRemoveWpLogo()
     {
         global $wp_admin_bar;
         $wp_admin_bar->remove_menu('wp-logo');
@@ -118,7 +118,7 @@ class alt_admin_branding
     /**
      * Replace 'Howdy' message.
      */
-    function alt_replace_howdy($wp_admin_bar)
+    function altReplaceHowdy($wp_admin_bar)
     {
         $my_account = $wp_admin_bar->get_node('my-account');
         $newtitle = str_replace('How are you,', 'Ay&apos;up', $my_account->title);
@@ -131,7 +131,7 @@ class alt_admin_branding
     /**
      * Custom admin footer
      */
-    function alt_custom_admin_footer()
+    function altCustomAdminFooter()
     {
         echo '<strong>' . get_bloginfo('name') . ', </strong>a site by <a style="color:#f60" href="http://www.alt-design.net/" title="Alt Design" target="_blank">Alt</a>';
     }
@@ -139,11 +139,11 @@ class alt_admin_branding
     /**
      * Custom admin footer version
      */
-    function alt_change_footer_version()
+    function altChangeFooterVersion()
     {
         return '<a href="http://alt-design.net" target="_blank" class="alt-footer-logo">Alt</a>';
     }
 
 }
 
-new alt_admin_branding();
+new AltAdminBranding();
