@@ -135,7 +135,7 @@ class AltThemeEndpoints
             ];
         }
 
-        echo helpers::alt_json_encode(['taxonomies' => $taxonomies, 'posts' => $posts]);
+        echo helpers::altJsonEncode(['taxonomies' => $taxonomies, 'posts' => $posts]);
 
         die();
     }
