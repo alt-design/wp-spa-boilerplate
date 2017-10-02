@@ -28,7 +28,7 @@ ob_start();
     </html>
 
 <?php
+//This builds the temporary HTML file for WebPack to use. Don't remove this.
 $html = fopen(__DIR__ . '/webpackTemp.html', 'w+');
-fwrite($html, str_replace('=\'' . get_stylesheet_directory_uri(), '=\'',
-    str_replace('="' . get_stylesheet_directory_uri(), '"', ob_get_contents())));
+fwrite($html, str_replace('=\'' . get_stylesheet_directory_uri(), '=\'', str_replace('="' . get_stylesheet_directory_uri(), '"', ob_get_contents())));
 fclose($html);
