@@ -470,4 +470,17 @@ add_action('rest_api_init', function () {
             ]
         ]
     ]);
+
+    /**
+     * Endpoint for getting All posts of a certain post type
+     */
+    register_rest_route('alt/v1', '/get-archives', [
+        'methods' => 'GET',
+        'callback' => ['AltThemeEndpoints', 'getArchives'],
+        'args' => [
+            'type' => [
+                'default' => false // Or an ID
+            ]
+        ]
+    ]);
 });
