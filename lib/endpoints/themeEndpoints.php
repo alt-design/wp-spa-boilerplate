@@ -364,6 +364,46 @@ class AltThemeEndpoints
         echo json_encode($AltThemeEndpoints->getPostData(intval($id), $isPreview));
         die();
     }
+
+    public static function getArchives($type, $postType = false)
+    {
+        if ($type['type'] == 'date') {
+            $y = 2009;
+            $dateArr = [];
+            $postType = $_GET['postType'];
+            do{
+                if(!empty(get_posts(['post_type' => $postType, 'date_query' => [['year' => $y]]]))){
+                    $dateArr[] = $y;
+                }
+                $y++;
+            }while($y <= date('Y'));
+            echo json_encode($dateArr);
+            die();
+        }
+
+        if ($type['type'] == 'categories') {
+            echo json_encode(get_terms(
+                [
+                    'taxonomy' => 'category',
+                    'hide_empty' => false
+                ]
+            ));
+            die();
+        }
+
+        if ($type['type'] == 'expertise') {
+            echo json_encode(get_terms(
+                [
+                    'taxonomy' => 'expertise',
+                    'hide_empty' => false
+                ]
+            ));
+            die();
+        }
+
+        echo 'Type not specified. Please add either `date`, `categories` or `expertise`';
+        die();
+    }
 }
 
 
